@@ -10,7 +10,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git url: 'https://github.com/pkanderi-abio/TF-VMware', branch: 'main'  # Replace with your repo
+        git url: 'https://github.com/pkanderi-abio/TF-VMware', branch: 'main'
       }
     }
 
@@ -41,7 +41,7 @@ pipeline {
 
   post {
     always {
-      cleanWs()  # Clean workspace
+      cleanWs()
     }
   }
 }
