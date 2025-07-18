@@ -1,0 +1,25 @@
+# ansible/playbook.yml
+- name: Install Nginx on VM
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600  # Cache for 1 hour
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+    - name: Start Nginx service
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+    - name: Check Nginx status
+      command: nginx -v
+      register: nginx_version
+      changed_when: false  # Don't mark as changed
+    - name: Debug Nginx version
+      debug:
+        msg: "Nginx version: {{ nginx_version.stderr }}"
