@@ -20,10 +20,10 @@ This repository uses Terraform to provision virtual machines (VMs) in a VMware v
 - Ansible: Installed on your local machine (for post-provisioning).
 - SSH Key Pair: Generate a key pair (e.g., `ssh-keygen -t rsa -f ~/.ssh/my-key-pair`) and add the public key to `terraform.tfvars` or `main.tf`.
 - Git: Clone this repo.
-
+```
 ## Setup
 
-1.Clone the Repository:
+1. Clone the Repository:
 
 ```console
    git clone <your-repo-url>
@@ -31,27 +31,27 @@ This repository uses Terraform to provision virtual machines (VMs) in a VMware v
 ```
 
 
-2.Update `terraform.tfvars`:
+2. Update `terraform.tfvars`:
    - Edit `terraform.tfvars` with your vSphere credentials and optional overrides (e.g., vm_count, ssh_public_key).
-     ```
+     ```console
      vsphere_user     = "Administrator@vsphere.local"
      vsphere_password = "your-password"
      vsphere_server   = "<vCenterName/IP Address>"
      ssh_public_key   = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD... your-public-key-here"
      ```
 
-3.Initialize Terraform:
-   ```
+3. Initialize Terraform:
+   ```console
    terraform init
    ```
 
-4.Preview the Plan:
-   ```
+4. Preview the Plan:
+   ```console
    terraform plan
    ```
 
-5.Apply the Configuration:
-   ```
+5. Apply the Configuration:
+   ```console
    terraform apply
    ```
    - Type `yes` to confirm. This provisions the VMs, sets up SSH, and runs Ansible to install Nginx.
@@ -65,7 +65,7 @@ This repository uses Terraform to provision virtual machines (VMs) in a VMware v
 
 ## Cleanup
 1. Destroy Resources:
-   ```
+   ```console
    terraform destroy
    ```
    - Type `yes` to confirm. This deletes the VMs and folder.
@@ -85,4 +85,3 @@ MIT License. See LICENSE for details.
 - Ansible for post-provisioning.
 
 Feel free to contribute or open issues!
-```
