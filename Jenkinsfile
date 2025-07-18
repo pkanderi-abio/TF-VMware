@@ -2,21 +2,21 @@ pipeline {
   agent any
 
   environment {
-    TF_VAR_vsphere_user     = credentials('vsphere-creds').username
-    TF_VAR_vsphere_password = credentials('vsphere-creds').password
-    TF_VAR_vsphere_server   = credentials('vsphere-server')
+    TF_VAR_vsphere_user     = "${credentials('vsphere-creds').username}"
+    TF_VAR_vsphere_password = "${credentials('vsphere-creds').password}"
+    TF_VAR_vsphere_server   = "${credentials('vsphere-server')}" 
   }
 
   stages {
     stage('Checkout') {
       steps {
-        git url: 'https://github.com/pkanderi-abio/TF-VMware', branch: 'main'
+        git branch: 'main', url: 'https://github.com/pkanderi-abio/TF-VMware'
       }
     }
 
     stage('Terraform Init') {
       steps {
-        sh 'terraform init'
+        sh 'terraform init -upgrade'
       }
     }
 
@@ -34,7 +34,7 @@ pipeline {
 
     stage('Terraform Apply') {
       steps {
-        sh 'terraform apply -auto-approve plan.tfout'
+        sh 'terraform apply plan.tfout'
       }
     }
   }
